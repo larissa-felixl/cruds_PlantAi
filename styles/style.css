@@ -6,25 +6,29 @@
 p {
     color: #5D8043;
     font-size: 20px;
-    font-weight: 550;
+}
 
+#mensagem {
+    color: #9B3D3D;
+    font-size: 14px;
+    font-weight: lighter;
+}
+
+#link_login {
+    color: #9B3D3D;
+    font-size: 14px;
+    font-weight: lighter;
 }
 
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     background-color: #A7BF77;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-}
-
-#container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 #box {
@@ -37,17 +41,16 @@ body {
     text-align: center;
 }
 
-
-#box > label {
+#box > form > label {
     display: block;
-    margin: 30px 0px 5px;
+    margin: 15px 0px 5px;
     color: #5D8043;
     text-align: left;
     font-weight: 550;
     font-size: 20px;
 }
 
-#box > input {
+#box > form > input {
     width: 100%;
     padding: 10px;
     border: 1px solid #5D8043;
@@ -56,8 +59,8 @@ body {
     font-size: 14px;
 }
 
-#box button {
-    margin: 40px;
+#box > form > button {
+   margin: 15px 0px 5px;
     background-color: #5D8043;
     color: #fefcd4;
     padding: 10px;
@@ -70,6 +73,23 @@ body {
     
 }
 
-#box button:hover {
+#box > form > button:hover {
     background-color: #A7BF77;
+}
+
+#link_cadastro {
+    display: flex;
+    justify-content: center;
+} 
+
+#link_cadastro > p {
+    font-weight: lighter;
+    color: #5D8043;
+    font-size: 14px;
+}
+
+a {
+    font-weight: bold;
+    color: #44602F;
+
 }

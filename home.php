@@ -10,7 +10,7 @@ include_once'protect.php';
     <title>HOME</title>
 </head>
 <body>
-    <h1>Bem-vindo, usuário <?= $_SESSION['ID'] ?>!</h1>
+    <h1>Bem-vindo, usuário <?= $_SESSION['EMAIL_user'] ?>!</h1>
     <a href="logout.php">Sair</a>
 </body>
 </html>
