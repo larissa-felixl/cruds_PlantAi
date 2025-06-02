@@ -23,9 +23,7 @@ if (isset($_POST['email']) || isset($_POST['password'])) {
                 $_SESSION['EMAIL_user'] = $email;
                 header('Location: home.php');
                 exit();
-            }
-        
-         else {
+            } else {
             $mensagem = "Falha ao logar! E-mail ou senha incorretos.";
         }
     }
