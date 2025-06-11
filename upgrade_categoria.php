@@ -10,6 +10,7 @@ if (!isset($_POST['name']) && !isset($_POST['description']) && !isset($_POST['im
     $mensagem = "Preencha algum campo para fazer edição!";
 
 } else {
+
     try {
         if(isset($_POST['name'])){
             $new_name = $_POST['name'];
@@ -31,6 +32,7 @@ if (!isset($_POST['name']) && !isset($_POST['description']) && !isset($_POST['im
             if (!is_dir($upload_dir)) {
                 mkdir($upload_dir, 0755, true);
             }
+
             $ext_permitida = ['jpg', 'jpeg', 'png', 'webp'];
             $caminho_tmp = $_FILES['image']['tmp_name'];
             $nome_original = $_FILES['image']['name'];
@@ -38,6 +40,7 @@ if (!isset($_POST['name']) && !isset($_POST['description']) && !isset($_POST['im
 
             if (!in_array($ext, $ext_permitida)) {
                 $mensagem = "Formato de imagem inválido. Use JPG, PNG, JPEG ou WEBP.";
+
             } else {
                 $novo_nome = uniqid("categoria_", true) . "." . $ext;
                 $caminho_final = $upload_dir . '/' . $novo_nome;
@@ -47,23 +50,31 @@ if (!isset($_POST['name']) && !isset($_POST['description']) && !isset($_POST['im
                     $stmt->bindParam(':image', $caminho_final);
                     $stmt->bindParam(':id_category', $id_category);
                     $stmt->execute();
-                } if ($stmt->execute()) {
-                            if ($stmt->rowCount() > 0) {                            
+
+                    if ($stmt->execute()) {
+                        if ($stmt->rowCount() > 0) {                            
                             header('Location: categoria.php');
-                                exit();
-                        } else {
-                            $mensagem = "Erro ao tentar efetivar cadastro de categoria.";
-                        }
+                            exit();
+
                     } else {
-                        throw new PDOException("Erro: Não foi possível executar a declaraçãosql");
-                        }
-                    }    
-                } catch (PDOException $erro) {
-                echo "Erro: " . $erro->getMessage();
-                }       
+                    $mensagem = "Erro ao tentar efetivar cadastro de categoria.";
+
+                }
+            } else {
+                throw new PDOException("Erro: Não foi possível executar a declaração SQL");
+
+            }
+        } else {
+            $mensagem = "Falha ao mover o arquivo de imagem.";
+
         }
-        
     }
+} 
+    } catch (PDOException $erro) { 
+        echo "Erro: " . $erro->getMessage();
+    }
+        }
+
 
 ?>
 <!DOCTYPE html>
@@ -72,6 +83,7 @@ if (!isset($_POST['name']) && !isset($_POST['description']) && !isset($_POST['im
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faça edições na sua categoria.</title>
+    <link rel="stylesheet" href="styles/upgrade_categoria.css?v=<?= time()?>">
 </head>
 <body>
     <div id="box">
@@ -93,9 +105,9 @@ if (!isset($_POST['name']) && !isset($_POST['description']) && !isset($_POST['im
                 <p>Fazer upload de arquivo .png ou .jpeg</p>
                 <img src="assets/images/upload.png" alt="Upload Icon">
             </div>
-            <input type="file" id="image" name="image" accept="image/*" style="display: none;">
             
-            <button type="submit">Cadastrar</button>
+            <input type="file" id="image" name="image" accept="image/*" style="display: none;">
+            <a href="categoria.php"><button type="submit">Editar</button></a>  
         </form>
     </div>
     

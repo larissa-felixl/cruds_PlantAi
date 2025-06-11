@@ -61,8 +61,10 @@ $categorias = $stmt->fetchall(PDO::FETCH_ASSOC);
                         <a href="planta.php" ><button id="botao_categoria">Categoria</button></a>
                         <p id="nome_categoria"> <?= htmlspecialchars($categoria['NAME']) ?> </p>
                         <p id="desc_categoria"> <?= htmlspecialchars($categoria['DESCRIPTION'])?></p>  
+                        
                         <div id="botoes_editar_excluir">
-                            <Button id="botao_editar" >Editar</Button>
+                            <a href="upgrade_categoria.php"><Button type="submit"  id="botao_editar" >Editar</Button></a>
+
                             <button id="botao_excluir" >Excluir</button>
                         </div>
                     </div>
