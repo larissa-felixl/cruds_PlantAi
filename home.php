@@ -8,7 +8,7 @@ include_once 'protect.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOME</title>
-    <link rel="stylesheet" href="styles/home.css">
+    <link rel="stylesheet" href="styles/home.css?v=<?= time()?>">
 </head>
 <body>
     <header id="cabecalho">

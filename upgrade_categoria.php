@@ -4,18 +4,32 @@ include_once 'protect.php';
 include_once 'conexao.php';
 $conexao = conect();
 $mensagem = '';
-
-if (isset($_POST['name']) || isset($_POST['description']) || isset($_POST['image'])) {
-    if (strlen($_POST['name']) == 0) {
-        $mensagem = "Preencha o campo nome da categoria!";
-    } else if (strlen($_POST['description']) == 0) {
-        $mensagem = "Preencha o campo descrição da categoria!";
-    } else if (($_FILES['image']) == 0) {
-        $mensagem = "Preencha o campo imagem da categoria!";
-    }else {
-        $name = ($_POST['name']);
-        $description = ($_POST['description']);
-        $upload_dir = "assets/images/imgs_planta";
+$id_category = $_SESSION['ID_category'];
+if (!isset($_POST['name']) && !isset($_POST['description']) && !isset($_POST['image'])) {
+    $mensagem = "Preencha algum campo para fazer edição!";
+}else {
+    if(isset($_POST['name'])){;
+        $stmt = $conexao->prepare("SELECT NAME FROM CATEGORY WHERE ID = :id_category ");
+        $stmt->bindParam(':id_category', $id_category);
+        $stmt->execute();   
+        $name = $stmt->fetch(PDO::FETCH_ASSOC);       
+    
+        $new_name = $_POST['name'];
+        $stmt = $conexao->prepare("UPDATE CATEGORY SET NAME = :name WHERE ID = :id_category");
+        $stmt->bindParam(':name', $new_name);
+        $stmt->bindParam(':id_category', $id_category);
+        $stmt->execute();
+    }
+    
+    
+    
+    
+    
+    
+    
+    $name = ($_POST['name']);
+    $description = ($_POST['description']);
+    $upload_dir = "assets/images/imgs_planta";
         
         if (!is_dir($upload_dir)) {
             mkdir($upload_dir, 0755, true);
@@ -68,17 +82,16 @@ if (isset($_POST['name']) || isset($_POST['description']) || isset($_POST['image
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastre uma nova categoria</title>
-    <link rel="stylesheet" href="styles/cadastro_categoria.css?v=<?= time()?>"   >
+    <title>Faça edições na sua categoria.</title>
 </head>
 <body>
     <div id="box">
         <form action="" method="POST" enctype="multipart/form-data">
-            <h1 id="titulo">Descreva sua categoria</h1>
+            <h1 id="titulo">Edite a sua categoria</h1>
 
             <?php if(!empty($mensagem)): ?>
             <p id="mensagem"> <?= $mensagem ?>  </p>
