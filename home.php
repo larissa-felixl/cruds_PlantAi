@@ -1,5 +1,5 @@
 <?php
-include_once'protect.php';
+include_once 'protect.php';
 ?>
 
 <!DOCTYPE html>
@@ -12,25 +12,34 @@ include_once'protect.php';
 </head>
 <body>
     <header id="cabecalho">
+        <div id="titulo">
+            <h1>Bem-vinda(o), <?= $_SESSION['EMAIL_user'] ?>!</h1>
+            <a href="logout.php">Sair</a>
+        </div>
+    
         <div id="logo">
             <h1 >PlantAi</h1>
         </div>
+        
     </header>
 
     <div id="navegador"> 
-            <a href="index.php">Login</a>
+            <a href="index.php">Login></a>
     </div>
     
-
     <div id="fundo">
-        <div></div>
-        <div></div>
-        <h1>Bem-vindo, usuário <?= $_SESSION['EMAIL_user'] ?>!</h1>
-        <a href="logout.php">Sair</a>
+        <div id="container1">
+            <h1>Ir para cadastro de categorias</h1>
+            <a href="categoria.php"><button class="botao">Ir</button></a>
+        </div>
+        
+        <div id="container2">
+            <h1>Ir para cadastro de vendas</h1>
+            <a href="index.php"><button class="botao">Ir</button></a>
+        </div>
     </div>
 
-    <footer>
-
+    <footer id="rodape">
     </footer>
 </body>
 </html>
