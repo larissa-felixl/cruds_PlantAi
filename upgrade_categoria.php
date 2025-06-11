@@ -5,64 +5,49 @@ include_once 'conexao.php';
 $conexao = conect();
 $mensagem = '';
 $id_category = $_SESSION['ID_category'];
+
 if (!isset($_POST['name']) && !isset($_POST['description']) && !isset($_POST['image'])) {
     $mensagem = "Preencha algum campo para fazer edição!";
-}else {
-    if(isset($_POST['name'])){;
-        $stmt = $conexao->prepare("SELECT NAME FROM CATEGORY WHERE ID = :id_category ");
-        $stmt->bindParam(':id_category', $id_category);
-        $stmt->execute();   
-        $name = $stmt->fetch(PDO::FETCH_ASSOC);       
-    
-        $new_name = $_POST['name'];
-        $stmt = $conexao->prepare("UPDATE CATEGORY SET NAME = :name WHERE ID = :id_category");
-        $stmt->bindParam(':name', $new_name);
-        $stmt->bindParam(':id_category', $id_category);
-        $stmt->execute();
-    }
-    
-    
-    
-    
-    
-    
-    
-    $name = ($_POST['name']);
-    $description = ($_POST['description']);
-    $upload_dir = "assets/images/imgs_planta";
-        
-        if (!is_dir($upload_dir)) {
-            mkdir($upload_dir, 0755, true);
+
+} else {
+    try {
+        if(isset($_POST['name'])){
+            $new_name = $_POST['name'];
+            $stmt = $conexao->prepare("UPDATE CATEGORY SET NAME = :name WHERE ID = :id_category");
+            $stmt->bindParam(':name', $new_name);
+            $stmt->bindParam(':id_category', $id_category);
+            $stmt->execute();
+        } 
+        if(isset($_POST['description'])){
+            $new_description = $_POST['description'];
+            $stmt = $conexao->prepare("UPDATE CATEGORY SET DESCRIPTION = :description WHERE ID = :id_category");
+            $stmt->bindParam(':description', $new_description);
+            $stmt->bindParam(':id_category', $id_category);
+            $stmt->execute();
         }
+        if(isset($_POST['image'])){
+            $upload_dir = "assets/images/imgs_planta";
+            
+            if (!is_dir($upload_dir)) {
+                mkdir($upload_dir, 0755, true);
+            }
+            $ext_permitida = ['jpg', 'jpeg', 'png', 'webp'];
+            $caminho_tmp = $_FILES['image']['tmp_name'];
+            $nome_original = $_FILES['image']['name'];
+            $ext = strtolower(pathinfo($nome_original, PATHINFO_EXTENSION));
 
-        $ext_permitida = ['jpg', 'jpeg', 'png', 'webp'];
-        $caminho_tmp = $_FILES['image']['tmp_name'];
-        $nome_original = $_FILES['image']['name'];
-        $ext = strtolower(pathinfo($nome_original, PATHINFO_EXTENSION));
+            if (!in_array($ext, $ext_permitida)) {
+                $mensagem = "Formato de imagem inválido. Use JPG, PNG, JPEG ou WEBP.";
+            } else {
+                $novo_nome = uniqid("categoria_", true) . "." . $ext;
+                $caminho_final = $upload_dir . '/' . $novo_nome;
 
-        if (!in_array($ext, $ext_permitida)) {
-            $mensagem = "Formato de imagem inválido. Use JPG, PNG, JPEG ou WEBP.";
-        } else {
-            $novo_nome = uniqid("categoria_", true) . "." . $ext;
-            $caminho_final = $upload_dir . '/' . $novo_nome;
-
-            if (move_uploaded_file($caminho_tmp, $caminho_final)){
-                try {
-                    $vrf = $conexao->prepare("SELECT * FROM CATEGORY WHERE NAME = :name");
-                    $vrf->bindParam(':name', $name);
-                    $vrf->execute();
-
-                    if($vrf->rowcount() > 0){
-                        $mensagem = ' Categoria já cadastrada <a href="categoria.php"  id="link_login">Clique aqui para voltar para a página de categorias.</a>';    
-                    
-                    } else{
-                        $user_id = $_SESSION['ID_user'];
-                        $stmt = $conexao->prepare("INSERT INTO CATEGORY ( NAME, DESCRIPTION, IMG, USER_ID ) VALUES(:name, :description, :image, :user_id)");
-                        $stmt->bindParam(':name', $name);
-                        $stmt->bindParam(':description', $description);
-                        $stmt->bindParam(':image', $caminho_final);
-                        $stmt->bindParam(':user_id', $user_id);
-                        if ($stmt->execute()) {
+                if (move_uploaded_file($caminho_tmp, $caminho_final)){
+                    $stmt = $conexao->prepare("UPDATE CATEGORY SET IMG = :image WHERE ID = :id_category");
+                    $stmt->bindParam(':image', $caminho_final);
+                    $stmt->bindParam(':id_category', $id_category);
+                    $stmt->execute();
+                } if ($stmt->execute()) {
                             if ($stmt->rowCount() > 0) {                            
                             header('Location: categoria.php');
                                 exit();
@@ -76,10 +61,10 @@ if (!isset($_POST['name']) && !isset($_POST['description']) && !isset($_POST['im
                 } catch (PDOException $erro) {
                 echo "Erro: " . $erro->getMessage();
                 }       
-            }
         }
+        
     }
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
