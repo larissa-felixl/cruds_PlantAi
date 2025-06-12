@@ -81,7 +81,7 @@ body {
     opacity: 0.7;
 }
 
-#box > form > button {
+#botao_editar {
     margin: 40px 0px 5px;
     background-color: #5D8043;
     color: #F4F1CC;
@@ -96,7 +96,7 @@ body {
     height: 35px;
 }
 
-#box > form > button:hover {
+#botao_editar:hover {
     background-color: #A7BF77;
     cursor: alias;
 }

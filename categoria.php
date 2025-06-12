@@ -5,7 +5,7 @@ include_once 'conexao.php';
 $conexao = conect();
 $mensagem = '';
 $user_id = $_SESSION['ID_user'];
-$stmt = $conexao->prepare("SELECT NAME, DESCRIPTION, IMG FROM CATEGORY WHERE USER_ID = :user_id ORDER BY ID DESC");
+$stmt = $conexao->prepare("SELECT ID, NAME, DESCRIPTION, IMG FROM CATEGORY WHERE USER_ID = :user_id ORDER BY ID DESC");
 $stmt->bindParam(':user_id', $user_id);
 $stmt->execute();
 $categorias = $stmt->fetchall(PDO::FETCH_ASSOC);
@@ -63,9 +63,8 @@ $categorias = $stmt->fetchall(PDO::FETCH_ASSOC);
                         <p id="desc_categoria"> <?= htmlspecialchars($categoria['DESCRIPTION'])?></p>  
                         
                         <div id="botoes_editar_excluir">
-                            <a href="upgrade_categoria.php"><Button type="submit"  id="botao_editar" >Editar</Button></a>
-
-                            <button id="botao_excluir" >Excluir</button>
+                            <a href="upgrade_categoria.php?ID_category=<?= $categoria['ID']?>"><Button type="submit" id="botao_editar">Editar</Button></a>    
+                            <a href="delete_categoria.php?ID_category=<?= $categoria['ID']?>"><button type="submit" id="botao_excluir" >Excluir</button></a>
                         </div>
                     </div>
                 <?php endforeach; ?>
