@@ -211,9 +211,13 @@ a {
     margin: 20px;
 } 
 
-
-
-
+#mensagem {
+    color: #9B3D3D;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
 
 
 
