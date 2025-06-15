@@ -147,15 +147,6 @@ body{
     margin: 20px;
 }
 
-.bloco{
-    height: 350px;
-    width: 380px;
-    background-color: #f2eeacb7; 
-    border-radius: 20px;
-    border: 1px solid #3b512b76;
-    margin: 40px;
-}
-
 .botao_cadastro {
     width: 110px;
     height: 80px;
@@ -169,7 +160,53 @@ body{
     background-color: #F4F1CC;
 }
 
-#botao_categoria, #botao_editar, #botao_excluir{
+.bloco{
+    height: 350px;
+    width: 380px;
+    background-color: #f2eeacb7; 
+    border-radius: 20px;
+    border: 1px solid #3b512b76;
+    margin: 40px;
+}
+
+.bloco > #nome_descricao {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #5D8043;
+    text-align: center;
+}
+
+#botao_imagem_categoria {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.bloco img {
+    max-width: 90%;
+    margin-top: 0px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+#botao_categoria {
+    background-color: #5D8043;
+    color: #F4F1CC;
+    padding: 5px;
+    border-radius: 20px;
+    border: none;
+    font-size: 14px;
+    width: 80px;
+    height: 25px;
+    margin-top: 12px;  
+    display: inline-block;
+}
+
+ #botao_editar, #botao_excluir{
     color: #F4F1CC;
     padding: 12px;
     width: 100%;
@@ -208,8 +245,24 @@ a {
 }
 
 #botao_excluir, #botao_editar {
-    margin: 20px;
+    margin: 5px;
 } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #mensagem {
     color: #9B3D3D;
@@ -218,8 +271,6 @@ a {
     display: flex;
     align-items: center;
 }
-
-
 
 #rodape {
     background-color: #A7BF77;
