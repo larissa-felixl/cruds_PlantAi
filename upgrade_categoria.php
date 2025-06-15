@@ -4,7 +4,7 @@ include_once 'protect.php';
 include_once 'conexao.php';
 $conexao = conect();
 $mensagem = '';
-$id_category = isset($_GET['ID_category']) ? $_GET['ID_category'] : null;
+$id_category = $_GET['ID_category'];
 
 if (!$id_category) {
     die("Categoria não selecionada.");
@@ -15,22 +15,26 @@ if (empty($_POST['name']) && empty($_POST['description']) && empty($_POST['image
     $mensagem = "Preencha algum campo para fazer edição!";
 
 } else {
-
     try {
+        $alterado = false;
         if(isset($_POST['name'])){
             $new_name = $_POST['name'];
             $stmt = $conexao->prepare("UPDATE CATEGORY SET NAME = :name WHERE ID = :id_category");
             $stmt->bindParam(':name', $new_name);
             $stmt->bindParam(':id_category', $id_category);
             $stmt->execute();
+            $alterado = true;
         } 
+
         if(isset($_POST['description'])){
             $new_description = $_POST['description'];
             $stmt = $conexao->prepare("UPDATE CATEGORY SET DESCRIPTION = :description WHERE ID = :id_category");
             $stmt->bindParam(':description', $new_description);
             $stmt->bindParam(':id_category', $id_category);
             $stmt->execute();
+            $alterado = true;
         }
+
         if(isset($_POST['image'])){
             $upload_dir = "assets/images/imgs_planta";
             
@@ -54,28 +58,21 @@ if (empty($_POST['name']) && empty($_POST['description']) && empty($_POST['image
                     $stmt = $conexao->prepare("UPDATE CATEGORY SET IMG = :image WHERE ID = :id_category");
                     $stmt->bindParam(':image', $caminho_final);
                     $stmt->bindParam(':id_category', $id_category);
-
-                    if ($stmt->execute()) {
-                        if ($stmt->rowCount() > 0) {                            
-                            header('Location: categoria.php');
-                            exit();
-
-                        } else {
-                            $mensagem = "Erro ao tentar efetivar upgrade da categoria.";
-
-                        }
-                    } else {
-                        throw new PDOException("Erro: Não foi possível executar a declaração SQL");
-                        
-                    }
+                    $alterado = true;
                 } else {
                     $mensagem = "Falha ao mover o arquivo de imagem.";
-
                 }
             }
-        } 
+        }
+                             
+        if ($alterado) {                           
+                header('Location: categoria.php');
+                exit();
+        } else {
+                 $mensagem = "Erro ao tentar efetivar upgrade da categoria.";
+        }       
     } catch (PDOException $erro) { 
-        echo "Erro: " . $erro->getMessage();
+        $mensagem = "Erro no banco de dados: " . $erro->getMessage();
     }
 }
 
