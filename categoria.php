@@ -69,7 +69,7 @@ $categorias = $stmt->fetchall(PDO::FETCH_ASSOC);
                     </div>
                 <?php endforeach; ?>
             <?php  else: ?>
-                <p>Nenhuma categoria registrada.</p>
+                <p id="mensagem" >Nenhuma categoria registrada.</p>
             <?php endif; ?> 
         </div>
     </div>
