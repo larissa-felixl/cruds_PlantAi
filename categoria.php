@@ -64,7 +64,7 @@ $categorias = $stmt->fetchall(PDO::FETCH_ASSOC);
                         
                         <div id="botoes_editar_excluir">
                             <a href="upgrade_categoria.php?ID_category=<?= $categoria['ID']?>"><Button type="submit" id="botao_editar">Editar</Button></a>    
-                            <a href="delete_categoria.php?ID_category=<?= $categoria['ID']?>"><button type="submit" id="botao_excluir" >Excluir</button></a>
+                            <a href="delete_categoria.php?ID_category=<?= $categoria['ID']?>" onclick=" return confirm('Tem certeza que deseja excluir esta categoria?'); "><button type="submit" id="botao_excluir" >Excluir</button></a>
                         </div>
                     </div>
                 <?php endforeach; ?>

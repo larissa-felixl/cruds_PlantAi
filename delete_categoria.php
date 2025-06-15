@@ -27,24 +27,3 @@ if (!$id_category) {
         }       
     }
 
-
-
-?>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faça edições na sua categoria.</title>
-    <link rel="stylesheet" href="styles/delete_categoria.css?v=<?= time()?>">
-</head>
-<body>
-    <div id="box">
-        <h1>Categorias cadastradas</h1>
-        <div id="botoes_editar_excluir">
-            <a href="categoria.php?ID_category=<?= $categoria['ID']?>"><Button type="submit" id="botao_editar">Sim</Button></a>    
-            <a href="categoria.php?ID_category=<?= $categoria['ID']?>"><button type="submit" id="botao_excluir">Não</button></a>
-        </div>
-    </div>
-</body>
-</html>

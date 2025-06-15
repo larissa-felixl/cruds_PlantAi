@@ -5,16 +5,15 @@ include_once 'conexao.php';
 $conexao = conect();
 $mensagem = '';
 $id_category = $_GET['ID_category'];
+$stmt = $conexao->prepare("SELECT * FROM CATEGORY WHERE ID = :id_category");
+$stmt->bindParam(':id_category', $id_category);
+$stmt->execute();
+$category = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$id_category) {
     die("Categoria não selecionada.");
 
-}
-
-if (empty($_POST['name']) && empty($_POST['description']) && empty($_POST['image'])) {
-    $mensagem = "Preencha algum campo para fazer edição!";
-
-} else {
+}  else {
     try {
         $alterado = false;
         if(isset($_POST['name'])){
@@ -68,9 +67,8 @@ if (empty($_POST['name']) && empty($_POST['description']) && empty($_POST['image
         if ($alterado) {                           
                 header('Location: categoria.php');
                 exit();
-        } else {
-                 $mensagem = "Erro ao tentar efetivar upgrade da categoria.";
-        }       
+        } 
+             
     } catch (PDOException $erro) { 
         $mensagem = "Erro no banco de dados: " . $erro->getMessage();
     }
@@ -95,15 +93,15 @@ if (empty($_POST['name']) && empty($_POST['description']) && empty($_POST['image
             <?php endif; ?>
             
             <label for="name" >Nome:</label>
-            <input type="text" id="name"  name="name">
+            <input type="text" id="name"  name="name" value="<?= htmlspecialchars($category['NAME']) ?>">
                 
             <label for="description">Descrição:</label>
-            <input type="text" id="description"  name="description">
+            <input type="text" id="description"  name="description" value="<?= htmlspecialchars($category['DESCRIPTION']) ?>">
 
             <label for="image">Fazer upload de imagem ilustrativa:</label>
             <div id="upload-area" onclick="document.getElementById('image').click();">
                 <p>Fazer upload de arquivo .png ou .jpeg</p>
-                <img src="assets/images/upload.png" alt="Upload Icon">
+                <img src="<?= htmlspecialchars($category['IMG']) ?>" alt="Upload Icon">
             </div>
             
             <input type="file" id="image" name="image" accept="image/*" style="display: none;">
