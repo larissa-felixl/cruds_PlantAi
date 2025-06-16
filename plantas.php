@@ -50,7 +50,7 @@ $categoria = $stmt->fetchall(PDO::FETCH_ASSOC);
                 <div id="box_cadastro_categoria">
                     <h1>Cadastrar nova planta na categoria <?=$categoria[0]['NAME']?></h1>
                     <div >
-                        <a href="cadastro_planta.php?ID_category=<?= $categoria['ID']?>"><button class="botao_cadastro">+</button></a>    
+                        <a href="cadastro_planta.php?ID_category=<?= $categoria[0] ['ID']?>"><button class="botao_cadastro">+</button></a>    
                     </div>
                 </div>
             </div>
