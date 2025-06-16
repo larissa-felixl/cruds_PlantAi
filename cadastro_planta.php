@@ -4,6 +4,11 @@ include_once 'protect.php';
 include_once 'conexao.php';
 $conexao = conect();
 $mensagem = '';
+$user_id = $_SESSION['ID_user'];
+$stmt = $conexao->prepare("SELECT ID, NAME, DESCRIPTION, IMG FROM CATEGORY WHERE USER_ID = :user_id ORDER BY ID DESC");
+$stmt->bindParam(':user_id', $user_id);
+$stmt->execute();
+$categoria = $stmt->fetchall(PDO::FETCH_ASSOC);
 
 if (isset($_POST['name']) || isset($_POST['description']) || isset($_POST['image'])) {
     if (strlen($_POST['name']) == 0) {
@@ -72,13 +77,13 @@ if (isset($_POST['name']) || isset($_POST['description']) || isset($_POST['image
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastre uma nova categoria</title>
+    <title>Cadastre uma nova plamta na categoria </title>
     <link rel="stylesheet" href="styles/cadastro_categoria.css?v=<?= time()?>"   >
 </head>
 <body>
     <div id="box">
         <form action="" method="POST" enctype="multipart/form-data">
-            <h1 id="titulo">Descreva sua categoria</h1>
+            <h1 id="titulo">Descreva sua categoria <?=$categoria[0] ['NAME']?></h1>
 
             <?php if(!empty($mensagem)): ?>
             <p id="mensagem"> <?= $mensagem ?>  </p>

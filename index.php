@@ -37,8 +37,8 @@ if (isset($_POST['email']) || isset($_POST['password'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faça seu login na PlantAi!</title>
-     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/style.css"?v=<?= time()?>>
+    <link rel="stylesheet" href="styles/cadastro_user.css"?v=<?= time()?>>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="box">
