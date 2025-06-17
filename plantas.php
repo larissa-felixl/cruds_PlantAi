@@ -5,10 +5,16 @@ include_once 'conexao.php';
 $conexao = conect();
 $mensagem = '';
 $user_id = $_SESSION['ID_user'];
-$stmt = $conexao->prepare("SELECT ID, NAME, DESCRIPTION, IMG FROM CATEGORY WHERE USER_ID = :user_id ORDER BY ID DESC");
+$stmt = $conexao->prepare("SELECT * FROM CATEGORY WHERE USER_ID = :user_id ORDER BY ID DESC");
 $stmt->bindParam(':user_id', $user_id);
 $stmt->execute();
 $categoria = $stmt->fetchall(PDO::FETCH_ASSOC);
+
+$id_category = $categoria [0]['ID'];
+$stmt = $conexao->prepare("SELECT * FROM PLANT WHERE CATEGORY_ID = :category_id ORDER BY ID DESC");
+$stmt->bindParam(':category_id', $id_category);
+$stmt->execute();
+$plantas = $stmt->fetchall(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -16,7 +22,7 @@ $categoria = $stmt->fetchall(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navegue pelas categorias</title>
-    <link rel="stylesheet" href="styles/categorias.css?v=<?= time()?>">
+    <link rel="stylesheet" href="styles/plantas.css?v=<?= time()?>">
 </head>
 <body>
     <header id="cabecalho">
@@ -55,24 +61,25 @@ $categoria = $stmt->fetchall(PDO::FETCH_ASSOC);
                 </div>
             </div>
             
-             <?php if(!empty($categorias)): ?>
+            <?php if(!empty($plantas)): ?>
+                <?php foreach($plantas as $planta):?>
                     <div class="bloco">
-                        <div id="botao_imagem_categoria">
-                            <img  style="width:200px; height:160px;"   src="" alt="imagem ilustrativa">
-                            <a href="" ><button id="botao_categoria">Planta</button></a>
+                        <div id="imagem">
+                            <img  style="width:200px; height:160px;"   src="<?= htmlspecialchars($planta['IMG'])?>" alt="imagem ilustrativa">
                         </div>
                         
                         <div id="nome_descricao">
-                            <p id="nome_categoria"> </p>
-                            <p id="desc_categoria"></p>  
+                            <p id="nome_categoria"> <?= htmlspecialchars($planta['NAME']) ?> </p>
+                            <p id="desc_categoria"> - <?= htmlspecialchars($planta['DESCRIPTION'])?></p>  
                         </div>
                         <div id="botoes_editar_excluir">
-                            <a href=""><Button type="submit" id="botao_editar">Editar</Button></a>    
-                            <a href="" onclick=" return confirm('Tem certeza que deseja excluir esta categoria?'); "><button type="submit" id="botao_excluir" >Excluir</button></a>
+                            <a href="upgrade_planta.php?ID_planta=<?= $planta['ID']?>"><Button type="submit" id="botao_editar">Editar</Button></a>    
+                            <a href="delete_planta.php?ID_planta=<?= $planta['ID']?>" onclick=" return confirm('Tem certeza que deseja excluir esta categoria?'); "><button type="submit" id="botao_excluir" >Excluir</button></a>
                         </div>
                     </div>
+                <?php endforeach; ?>
             <?php  else: ?>
-                <p id="mensagem" >Nenhuma planta registrada na categoria <?=$categoria[0] ['NAME']?>.</p>
+                <p id="mensagem" >Nenhuma categoria registrada.</p>
             <?php endif; ?> 
         </div>
     </div>
