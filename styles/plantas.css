@@ -169,7 +169,17 @@ body{
     margin: 40px;
 }
 
-.bloco > #nome_descricao {
+ #nome_descricao {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #5D8043;
+    text-align: center;
+}
+
+#preco {
     display: flex;
     justify-content: center;
     margin: 10px;

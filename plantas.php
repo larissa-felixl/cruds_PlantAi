@@ -21,7 +21,7 @@ $plantas = $stmt->fetchall(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navegue pelas categorias</title>
+    <title>Navegue pelas plantas</title>
     <link rel="stylesheet" href="styles/plantas.css?v=<?= time()?>">
 </head>
 <body>
@@ -72,9 +72,12 @@ $plantas = $stmt->fetchall(PDO::FETCH_ASSOC);
                             <p id="nome_categoria"> <?= htmlspecialchars($planta['NAME']) ?> </p>
                             <p id="desc_categoria"> - <?= htmlspecialchars($planta['DESCRIPTION'])?></p>  
                         </div>
+                        <div id= "preco">
+                            <p> R$ <?=htmlspecialchars($planta['PRICE'])?></p>
+                        </div>
                         <div id="botoes_editar_excluir">
-                            <a href="upgrade_planta.php?ID_planta=<?= $planta['ID']?>"><Button type="submit" id="botao_editar">Editar</Button></a>    
-                            <a href="delete_planta.php?ID_planta=<?= $planta['ID']?>" onclick=" return confirm('Tem certeza que deseja excluir esta categoria?'); "><button type="submit" id="botao_excluir" >Excluir</button></a>
+                            <a href="upgrade_planta.php?ID_plant=<?= $planta['ID']?>"><Button type="submit" id="botao_editar">Editar</Button></a>    
+                            <a href="delete_planta.php?ID_plant=<?= $planta['ID']?>" onclick=" return confirm('Tem certeza que deseja excluir esta categoria?'); "><button type="submit" id="botao_excluir" >Excluir</button></a>
                         </div>
                     </div>
                 <?php endforeach; ?>

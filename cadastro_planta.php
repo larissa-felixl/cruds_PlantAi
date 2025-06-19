@@ -82,7 +82,7 @@ if (isset($_POST['name']) || isset($_POST['description']) || isset($_POST['image
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastre uma nova plamta na categoria </title>
+    <title>Cadastre uma nova planta na categoria </title>
     <link rel="stylesheet" href="styles/cadastro_planta.css?v=<?= time()?>"   >
 </head>
 <body>
