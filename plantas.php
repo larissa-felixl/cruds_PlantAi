@@ -82,7 +82,7 @@ $plantas = $stmt->fetchall(PDO::FETCH_ASSOC);
                     </div>
                 <?php endforeach; ?>
             <?php  else: ?>
-                <p id="mensagem" >Nenhuma categoria registrada.</p>
+                <p id="mensagem" >Nenhuma planta registrada na categoria <?=$categoria[0]['NAME']?>.</p>
             <?php endif; ?> 
         </div>
     </div>
