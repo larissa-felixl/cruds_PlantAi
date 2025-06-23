@@ -24,7 +24,7 @@ if (isset($_POST['name']) || isset($_POST['description']) || isset($_POST['image
         $name = ($_POST['name']);
         $description = ($_POST['description']);
         $price = ($_POST['price']);
-        $upload_dir = "assets/images/imgs_planta";
+        $upload_dir = "assets/images/imgs_plantas";
         
         if (!is_dir($upload_dir)) {
             mkdir($upload_dir, 0755, true);
