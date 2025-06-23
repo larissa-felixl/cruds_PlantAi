@@ -73,8 +73,9 @@ body {
     color: #5D8043;
     font-size: 16px;
     font-weight: 500;
-    text-align: center;
     position: relative;
+    text-align: center;
+    overflow: hidden;
 }
 
 #upload-area:hover {
@@ -92,13 +93,21 @@ body {
     opacity: 0.7;
 }
 
+#upload-area > p, #img_salva:first-of-type {
+    position: relative;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+}
+
 #preview {
-    display: block;
-    width: 120px;      
-    height: auto;         
-    margin: 10px auto 0;  
-    border-radius: 8px;    
-    object-fit: contain;   
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: auto;
+    border-radius: 8px;
+    object-fit: contain;
+    z-index: 2; 
 }
 
 #box > form > button {
