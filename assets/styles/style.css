@@ -1,0 +1,104 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+
+}
+#titulo {
+    color: #5D8043;
+    font-size: 40px;
+}
+
+p {
+    color: #5D8043;
+    font-size: 20px;
+}
+
+#mensagem {
+    color: #9B3D3D;
+    font-size: 14px;
+    font-weight: lighter;
+    margin: 10px;
+}
+
+#link_login {
+    color: #9B3D3D;
+    font-size: 14px;
+    font-weight: lighter;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #A7BF77;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#box {
+    background-color: #F3F1CB;
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px #00000049;
+    width: 450px;
+    height: 450px;
+    text-align: center;
+}
+
+#box > form > label {
+    display: block;
+    margin: 15px 0px 5px;
+    color: #5D8043;
+    text-align: left;
+    font-weight: 550;
+    font-size: 20px;
+}
+
+#box > form > input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #5D8043;
+    border-radius: 6px;
+    background-color: #F3F1CB;
+    font-size: 14px;
+}
+
+#box > form > button {
+    margin: 30px 0px 5px;
+    background-color: #5D8043;
+    color: #F4F1CC;
+    padding: 10px;
+    width: 100%;
+    border-radius: 20px;
+    border: none;
+    font-size: 16px;
+    width: 100px;
+    height: 35px;
+    
+}
+
+#box > form > button:hover {
+    background-color: #A7BF77;
+}
+
+#link_cadastro {
+    display: flex;
+    justify-content: center;
+} 
+
+#link > p {
+    font-weight: lighter;
+    color: #5D8043;
+    font-size: 14px;
+}
+
+a {
+    font-weight: bold;
+    color: #44602F;
+
+}
+
