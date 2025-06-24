@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once 'protect.php';
-include_once 'conexao.php';
+include_once 'includes/protect.php';
+include_once 'includes/conexao.php';
 $conexao = conect();
 $mensagem = '';
 $id_planta = $_GET['ID_plant'];
@@ -91,7 +91,7 @@ if (!$id_planta) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faça edições na sua planta.</title>
-    <link rel="stylesheet" href="styles/upgrade_planta.css?v=<?= time()?>">
+    <link rel="stylesheet" href="assets/styles/upgrade_planta.css?v=<?= time()?>">
 </head>
 <body>
     <div id="box">

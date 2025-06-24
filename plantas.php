@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once 'protect.php';
-include_once 'conexao.php';
+include_once 'includes/protect.php';
+include_once 'includes/conexao.php';
 $conexao = conect();
 $mensagem = '';
 $user_id = $_SESSION['ID_user'];
@@ -22,7 +22,7 @@ $plantas = $stmt->fetchall(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navegue pelas plantas</title>
-    <link rel="stylesheet" href="styles/plantas.css?v=<?= time()?>">
+    <link rel="stylesheet" href="assets/styles/plantas.css?v=<?= time()?>">
 </head>
 <body>
     <header id="cabecalho">

@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once 'protect.php';
-include_once 'conexao.php';
+include_once 'includes/protect.php';
+include_once 'includes/conexao.php';
 $conexao = conect();
 $mensagem = '';
 $id_category = $_GET['ID_category'];
@@ -82,7 +82,7 @@ if (!$id_category) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faça edições na sua categoria.</title>
-    <link rel="stylesheet" href="styles/upgrade_categoria.css?v=<?= time()?>">
+    <link rel="stylesheet" href="assets/styles/upgrade_categoria.css?v=<?= time()?>">
 </head>
 <body>
     <div id="box">

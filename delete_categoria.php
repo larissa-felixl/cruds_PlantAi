@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once 'protect.php';
-include_once 'conexao.php';
+include_once 'includes/protect.php';
+include_once 'includes/conexao.php';
 $conexao = conect();
 $mensagem = '';
 $id_category = isset($_GET['ID_category']) ? $_GET['ID_category'] : null;

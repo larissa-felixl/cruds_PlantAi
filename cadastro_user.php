@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once 'conexao.php';
+include_once 'includes/conexao.php';
 $conexao = conect();
 if (isset($_POST['email']) || isset($_POST['password'] )) {
     if (strlen(trim($_POST['email'])) == 0 ) {
@@ -53,7 +53,7 @@ if (isset($_POST['email']) || isset($_POST['password'] )) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Se cadastre no PlantAi </title>
      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/cadastro_user.css?v=<?= time()?>">
+    <link rel="stylesheet" href="assets/styles/cadastro_user.css?v=<?= time()?>">
 </head>
 <body>
     <div id="box">

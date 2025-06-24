@@ -4,7 +4,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 }
 
 if(!isset($_SESSION['EMAIL_user'])){
-    exit("você não pode acessar essa página sem estar logado!
-    <p><a href =\"index.php\"> Entrar <a></p>");
+   header('Location: index.php');
+   exit();
 }
 ?>

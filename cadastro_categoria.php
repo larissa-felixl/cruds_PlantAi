@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once 'protect.php';
-include_once 'conexao.php';
+include_once 'includes/protect.php';
+include_once 'includes/conexao.php';
 $conexao = conect();
 $mensagem = '';
 
@@ -73,7 +73,7 @@ if (isset($_POST['name']) || isset($_POST['description']) || isset($_POST['image
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastre uma nova categoria</title>
-    <link rel="stylesheet" href="styles/cadastro_categoria.css?v=<?= time()?>"   >
+    <link rel="stylesheet" href="assets/styles/cadastro_categoria.css?v=<?= time()?>"   >
 </head>
 <body>
     <div id="box">
