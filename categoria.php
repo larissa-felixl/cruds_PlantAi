@@ -55,7 +55,7 @@ $categorias = $stmt->fetchall(PDO::FETCH_ASSOC);
             </div>
             
             <?php if(!empty($categorias)): ?>
-                <?php foreach($categorias as $categoria):?>
+                <?php foreach($categorias as $categoria):?> <!-para cada categoria dentro do array é executqado o bloco de codigo abaixo-!>
                     <div class="bloco">
                         <div id="botao_imagem_categoria">
                             <img  style="width:200px; height:160px;"   src="<?= htmlspecialchars($categoria['IMG'])?>" alt="imagem ilustrativa">

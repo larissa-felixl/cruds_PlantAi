@@ -35,25 +35,25 @@ if (!$id_category) {
         }
 
         if(isset($_FILES['image'])){
-            $upload_dir = "assets/images/imgs_plantas";
+            $upload_diretorio = "assets/images/imgs_plantas";
             
-            if (!is_dir($upload_dir)) {
-                mkdir($upload_dir, 0755, true);
+            if (!is_dir($upload_diretorio)) {
+                mkdir($upload_diretorio, 0777, true);
             }
 
-            $ext_permitida = ['jpg', 'jpeg', 'png', 'webp'];
-            $caminho_tmp = $_FILES['image']['tmp_name'];
+            $extensoes_permitidas = ['jpg', 'jpeg', 'png', 'webp'];
+            $caminho_temporario = $_FILES['image']['tmp_name'];
             $nome_original = $_FILES['image']['name'];
             $ext = strtolower(pathinfo($nome_original, PATHINFO_EXTENSION));
 
-            if (!in_array($ext, $ext_permitida)) {
+            if (!in_array($ext, $extensoes_permitidas)) {
                 $mensagem = "Formato de imagem inválido. Use JPG, PNG, JPEG ou WEBP.";
 
             } else {
                 $novo_nome = uniqid("planta_", true) . "." . $ext;
-                $caminho_final = $upload_dir . '/' . $novo_nome;
+                $caminho_final = $upload_diretorio . '/' . $novo_nome;
 
-                if (move_uploaded_file($caminho_tmp, $caminho_final)){
+                if (move_uploaded_file($caminho_temporario, $caminho_final)){
                     $stmt = $conexao->prepare("UPDATE CATEGORY SET IMG = :image WHERE ID = :id_category");
                     $stmt->bindParam(':image', $caminho_final);
                     $stmt->bindParam(':id_category', $id_category);

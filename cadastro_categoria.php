@@ -6,33 +6,33 @@ $conexao = conect();
 $mensagem = '';
 
 if (isset($_POST['name']) || isset($_POST['description']) || isset($_POST['image'])) {
-    if (strlen($_POST['name']) == 0) {
+    if (strlen(trim($_POST['name'])) == 0) {
         $mensagem = "Preencha o campo nome da categoria!";
-    } else if (strlen($_POST['description']) == 0) {
+    } else if (strlen(trim($_POST['description'])) == 0) {
         $mensagem = "Preencha o campo descrição da categoria!";
-    } else if (($_FILES['image']) == 0) {
+    } else if ($_FILES['image']['error'] == 4) {
         $mensagem = "Preencha o campo imagem da categoria!";
     }else {
         $name = trim($_POST['name']);
         $description = trim($_POST['description']);
-        $upload_dir = "assets/images/imgs_planta";
+        $upload_diretorio = "assets/images/imgs_planta";
         
-        if (!is_dir($upload_dir)) {
-            mkdir($upload_dir, 0755, true);
+        if (!is_dir($upload_diretorio)) {
+            mkdir($upload_diretorio, 0777, true);
         }
 
-        $ext_permitida = ['jpg', 'jpeg', 'png', 'webp'];
-        $caminho_tmp = $_FILES['image']['tmp_name'];
+        $extensoes_permitidas = ['jpg', 'jpeg', 'png', 'webp'];
+        $caminho_temporario = $_FILES['image']['tmp_name'];
         $nome_original = $_FILES['image']['name'];
         $ext = strtolower(pathinfo($nome_original, PATHINFO_EXTENSION));
 
-        if (!in_array($ext, $ext_permitida)) {
+        if (!in_array($ext, $extensoes_permitidas)) {
             $mensagem = "Formato de imagem inválido. Use JPG, PNG, JPEG ou WEBP.";
         } else {
             $novo_nome = uniqid("categoria_", true) . "." . $ext;
-            $caminho_final = $upload_dir . '/' . $novo_nome;
+            $caminho_final = $upload_diretorio . '/' . $novo_nome;
 
-            if (move_uploaded_file($caminho_tmp, $caminho_final)){
+            if (move_uploaded_file($caminho_temporario, $caminho_final)){
                 try {
                     $vrf = $conexao->prepare("SELECT * FROM CATEGORY WHERE NAME = :name");
                     $vrf->bindParam(':name', $name);
