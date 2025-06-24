@@ -34,8 +34,8 @@ if (!$id_category) {
             $alterado = true;
         }
 
-        if(isset($_POST['image'])){
-            $upload_dir = "assets/images/imgs_planta";
+        if(isset($_FILES['image'])){
+            $upload_dir = "assets/images/imgs_plantas";
             
             if (!is_dir($upload_dir)) {
                 mkdir($upload_dir, 0755, true);
@@ -50,13 +50,14 @@ if (!$id_category) {
                 $mensagem = "Formato de imagem inválido. Use JPG, PNG, JPEG ou WEBP.";
 
             } else {
-                $novo_nome = uniqid("categoria_", true) . "." . $ext;
+                $novo_nome = uniqid("planta_", true) . "." . $ext;
                 $caminho_final = $upload_dir . '/' . $novo_nome;
 
                 if (move_uploaded_file($caminho_tmp, $caminho_final)){
                     $stmt = $conexao->prepare("UPDATE CATEGORY SET IMG = :image WHERE ID = :id_category");
                     $stmt->bindParam(':image', $caminho_final);
                     $stmt->bindParam(':id_category', $id_category);
+                    $stmt->execute();
                     $alterado = true;
                 } else {
                     $mensagem = "Falha ao mover o arquivo de imagem.";
@@ -98,16 +99,30 @@ if (!$id_category) {
             <label for="description">Descrição:</label>
             <input type="text" id="description"  name="description" value="<?= htmlspecialchars($category['DESCRIPTION']) ?>">
 
-            <label for="image">Fazer upload de imagem ilustrativa:</label>
-            <div id="upload-area" onclick="document.getElementById('image').click();">
-                <p>Fazer upload de arquivo .png ou .jpeg</p>
-                <img src="<?= htmlspecialchars($category['IMG']) ?>" alt="Upload Icon">
+            <div id="imagem_antiga_nova">
+                <div id="imagem_atual">
+                    <p>Imagem atual:</p>
+                    <img src="<?= htmlspecialchars($category['IMG']) ?>" alt="Upload Icon"  style="width:200px; height: 180px;"  >
+                </div>
+
+                <div id="nova_imagem_area">
+                    <label for="image">Fazer upload de uma nova imagem ilustrativa:</label>
+                    <div id="upload-area" onclick="document.getElementById('image').click();">
+                        <img style="display: none; width: 200px; height: 180px;" id="preview" src="#" alt="imagem ilustrativa">
+                        <p>Fazer upload de arquivo .png ou .jpeg</p>
+                        <div>
+                            <img src="assets/images/upload.png" alt="Upload Icon" id="img_salva">
+                        </div>
+                        
+                    </div>
+                </div>
             </div>
+            
             
             <input type="file" id="image" name="image" accept="image/*" style="display: none;">
             <button type="submit" id="botao_editar">Editar</button>
         </form>
     </div>
-    
+    <script src="assets/js/index.js"></script>
 </body>
 </html>

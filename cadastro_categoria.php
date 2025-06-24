@@ -39,7 +39,7 @@ if (isset($_POST['name']) || isset($_POST['description']) || isset($_POST['image
                     $vrf->execute();
 
                     if($vrf->rowcount() > 0){
-                        $mensagem = ' Categoria já cadastrada <a href="categoria.php"  id="link_login">Clique aqui para voltar para a página de categorias.</a>';    
+                        $mensagem = ' Categoria já cadastrada <a href="categoria.php"  id="link">Clique aqui para voltar para a página de categorias.</a>';    
                     
                     } else{
                         $user_id = $_SESSION['ID_user'];
@@ -94,37 +94,13 @@ if (isset($_POST['name']) || isset($_POST['description']) || isset($_POST['image
             <div id="upload-area" onclick="document.getElementById('image').click();">
                 <p>Fazer upload de arquivo .png ou .jpeg</p>
                 <img src="assets/images/upload.png" alt="Upload Icon" id="img_salva">
-                <img style="display: none; width: 180px; height: 140px;" id="preview" src="#" alt="h">
+                <img style="display: none; width: 180px; height: 140px;" id="preview" src="#" alt="imagem ilustrativa">
             </div>
             <input type="file" id="image" name="image" accept="image/*" style="display: none;">
             
             <button type="submit">Cadastrar</button>
         </form>
     </div>
-    <script>
-        function change_src(event) {
-        document.getElementById('preview').src = event.target.result;
-        document.getElementById('preview').style.display = 'block';
-        
-        document.querySelector('#upload-area > p').style.opacity = '0';
-        document.querySelector('#upload-area > img:first-of-type').style.opacity = '0';
-    }
-
-    function showPreview() {
-        const file = this.files[0];
-
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = change_src;
-            reader.readAsDataURL(file);
-        } else {
-            document.getElementById('preview').style.display = 'none';
-            document.getElementById('preview').src = '#';
-        }
-    }
-
-    document.getElementById('image').addEventListener('change', showPreview);
-       
-    </script>
+    <script src="assets/js/index.js"></script>
 </body>
 </html>

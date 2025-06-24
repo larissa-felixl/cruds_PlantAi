@@ -11,7 +11,7 @@ $stmt->execute();
 $planta = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$id_planta) {
-    die("Categoria não selecionada.");
+    die("planta não selecionada.");
 
 }  else {
     try {
@@ -43,8 +43,8 @@ if (!$id_planta) {
             $alterado = true;
         }
 
-        if(isset($_POST['image'])){
-            $upload_dir = "assets/images/imgs_planta";
+        if(isset($_FILES['image'])){
+            $upload_dir = "assets/images/imgs_plantas";
             
             if (!is_dir($upload_dir)) {
                 mkdir($upload_dir, 0755, true);
@@ -66,6 +66,7 @@ if (!$id_planta) {
                     $stmt = $conexao->prepare("UPDATE PLANT SET IMG = :image WHERE ID = :id_planta");
                     $stmt->bindParam(':image', $caminho_final);
                     $stmt->bindParam(':id_planta', $id_planta);
+                    $stmt->execute();
                     $alterado = true;
                 } else {
                     $mensagem = "Falha ao mover o arquivo de imagem.";
@@ -90,7 +91,7 @@ if (!$id_planta) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faça edições na sua planta.</title>
-    <link rel="stylesheet" href="styles/cadastro_planta.css?v=<?= time()?>">
+    <link rel="stylesheet" href="styles/upgrade_planta.css?v=<?= time()?>">
 </head>
 <body>
     <div id="box">
@@ -110,16 +111,29 @@ if (!$id_planta) {
             <label for="price">Preço:</label>
             <input type="decimal" id="price"  name="price" value="<?= htmlspecialchars($planta['PRICE']) ?>">
 
-            <label for="image">Fazer upload de imagem ilustrativa:</label>
-            <div id="upload-area" onclick="document.getElementById('image').click();">
-                <p>Fazer upload de arquivo .png ou .jpeg</p>
-                <img src="<?= htmlspecialchars($planta['IMG']) ?>" alt="Upload Icon">
+            <div id="imagem_antiga_nova">
+                <div id="imagem_atual">
+                    <p>Imagem atual:</p>
+                    <img src="<?= htmlspecialchars($planta['IMG']) ?>" alt="imagem atual"  style="width:200px; height: 180px;"  >
+                </div>
+
+                <div id="nova_imagem_area">
+                    <label for="image">Fazer upload de uma nova imagem ilustrativa:</label>
+                    <div id="upload-area" onclick="document.getElementById('image').click();">
+                        <img style="display: none; width: 200px; height: 180px;" id="preview" src="#" alt="imagem ilustrativa">
+                        <p>Fazer upload de arquivo .png ou .jpeg</p>
+                        <div>
+                            <img src="assets/images/upload.png" alt="Upload Icon" id="img_salva">
+                        </div>
+                        
+                    </div>
+                </div>
             </div>
             
             <input type="file" id="image" name="image" accept="image/*" style="display: none;">
             <button type="submit" id="botao_editar">Editar</button>
         </form>
     </div>
-    
+    <script src="assets/js/index.js"></script>
 </body>
 </html>

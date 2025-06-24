@@ -48,7 +48,7 @@ if (isset($_POST['name']) || isset($_POST['description']) || isset($_POST['image
                     $vrf->execute();
 
                     if($vrf->rowcount() > 0){
-                        $mensagem = ' Categoria já cadastrada <a href="plantas.php" id="link_login">Clique aqui para voltar para a página de plantas.</a>';    
+                        $mensagem = ' Planta já cadastrada <a href="plantas.php" id="link">Clique aqui para voltar para a página de plantas.</a>';    
                     
                     } else{
                         $stmt = $conexao->prepare("INSERT INTO PLANT ( NAME, DESCRIPTION, PRICE, IMG, USER_ID, CATEGORY_ID ) VALUES(:name, :description, :price, :image, :user_id, :category_id)");
@@ -106,12 +106,14 @@ if (isset($_POST['name']) || isset($_POST['description']) || isset($_POST['image
             <label for="image">Fazer upload de imagem ilustrativa:</label>
             <div id="upload-area" onclick="document.getElementById('image').click();">
                 <p>Fazer upload de arquivo .png ou .jpeg</p>
-                <img src="assets/images/upload.png" alt="Upload Icon">
+                <img src="assets/images/upload.png" alt="Upload Icon" id="img_salva">
+                <img style="display: none; width: 180px; height: 140px;" id="preview" src="#" alt="imagem ilustrativa">
             </div>
             <input type="file" id="image" name="image" accept="image/*" style="display: none;">
             
             <button type="submit">Cadastrar</button>
         </form>
     </div>
+    <script src="assets/js/index.js"></script>
 </body>
 </html>
