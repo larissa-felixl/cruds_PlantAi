@@ -9,7 +9,7 @@ function mostra_img(event) {
 function ler_img() {
     const arquivo = this.files[0];
 
-    if (file) {
+    if (arquivo) {
         const leitor = new FileReader();
         leitor.onload = mostra_img;
         leitor.readAsDataURL(arquivo);

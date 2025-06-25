@@ -135,6 +135,6 @@ if (!$id_planta) {
             <button type="submit" id="botao_editar">Editar</button>
         </form>
     </div>
-    <script src="assets/js/index.js"></script>
+    <script src="assets/js/index.js?v=<?= time()?>"></script>
 </body>
 </html>

@@ -102,6 +102,6 @@ if (isset($_POST['name']) || isset($_POST['description']) || isset($_POST['image
             <button type="submit">Cadastrar</button>
         </form>
     </div>
-    <script src="assets/js/index.js"></script>
+    <script src="assets/js/index.js?v=<?= time()?>"></script>
 </body>
 </html>
