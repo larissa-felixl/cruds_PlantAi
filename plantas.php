@@ -14,7 +14,7 @@ $id_category = $categoria [0]['ID'];
 $stmt = $conexao->prepare("SELECT * FROM PLANT WHERE CATEGORY_ID = :category_id ORDER BY ID DESC");
 $stmt->bindParam(':category_id', $id_category);
 $stmt->execute();
-$plantas = $stmt->fetchall(PDO::FETCH_ASSOC);
+$plantas = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

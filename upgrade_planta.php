@@ -121,6 +121,7 @@ if (!$id_planta) {
                     <label for="image">Fazer upload de uma nova imagem ilustrativa:</label>
                     <div id="upload-area" onclick="document.getElementById('image').click();">
                         <img style="display: none; width: 200px; height: 180px;" id="preview" src="#" alt="imagem ilustrativa">
+                        
                         <p>Fazer upload de arquivo .png ou .jpeg</p>
                         <div>
                             <img src="assets/images/upload.png" alt="Upload Icon" id="img_salva">

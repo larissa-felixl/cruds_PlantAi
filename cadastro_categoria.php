@@ -94,6 +94,7 @@ if (isset($_POST['name']) || isset($_POST['description']) || isset($_POST['image
             <div id="upload-area" onclick="document.getElementById('image').click();">
                 <p>Fazer upload de arquivo .png ou .jpeg</p>
                 <img src="assets/images/upload.png" alt="Upload Icon" id="img_salva">
+                
                 <img style="display: none; width: 180px; height: 140px;" id="preview" src="#" alt="imagem ilustrativa">
             </div>
             <input type="file" id="image" name="image" accept="image/*" style="display: none;">

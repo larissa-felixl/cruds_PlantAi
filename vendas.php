@@ -28,15 +28,7 @@ include_once 'includes/protect.php';
     </div>
     
     <div id="fundo">
-        <div id="container1">
-            <h1>Ir para cadastro de categorias</h1>
-            <a href="categoria.php"><button class="botao">Ir</button></a>
-        </div>
-        
-        <div id="container2">
-            <h1>Ir para cadastro de vendas</h1>
-            <a href="vendas.php"><button class="botao">Ir</button></a>
-        </div>
+        <h1 id="titulo"  style="margin-top:200px; margin-bottom:200px;"  >Página em construção! </h1>
     </div>
 
     <footer id="rodape">
