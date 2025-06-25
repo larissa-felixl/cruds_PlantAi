@@ -38,7 +38,7 @@ if (!$id_category) {
             $upload_diretorio = "assets/images/imgs_plantas";
             
             if (!is_dir($upload_diretorio)) {
-                mkdir($upload_diretorio, 0777, true);
+                mkdir($upload_diretorio, 0755, true);
             }
 
             $extensoes_permitidas = ['jpg', 'jpeg', 'png', 'webp'];

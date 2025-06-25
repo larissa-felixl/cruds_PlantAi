@@ -55,7 +55,7 @@ if (!$id_planta) {
             $nome_original = $_FILES['image']['name'];
             $ext = strtolower(pathinfo($nome_original, PATHINFO_EXTENSION));
 
-            if (!in_array($ext, $ext_permitidas)) {
+            if (!in_array($ext, $extensoes_permitidas)) {
                 $mensagem = "Formato de imagem inválido. Use JPG, PNG, JPEG ou WEBP.";
 
             } else {
